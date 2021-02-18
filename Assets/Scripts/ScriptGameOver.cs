@@ -14,11 +14,16 @@ public class ScriptGameOver : MonoBehaviour
         }
         if (GUI.Button(new Rect(10, 120, 120, 40), "Sair do Jogo"))
         {
-            Application.Quit();
+            SairDoJogo();
         }
     }
 
-    public void ReiniciarJogo()
+    public static void SairDoJogo()
+    {
+        Application.Quit();
+    }
+
+    public static void ReiniciarJogo()
     {
         ScriptGameMaster.pontuacao = 0;
         ScriptNave.velocidade = 30f;
