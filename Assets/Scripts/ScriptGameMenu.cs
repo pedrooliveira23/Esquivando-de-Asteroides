@@ -11,8 +11,8 @@ public class ScriptGameMenu : MonoBehaviour
     void Start()
     {
         GameObject.Find("/CanvasMenu/BtnMenuPlay").GetComponent<Button>().onClick.AddListener(Play);
-        GameObject.Find("/CanvasMenu/BtnMenuPlay").GetComponent<Button>().onClick.AddListener(Ranking);
-        GameObject.Find("/CanvasMenu/BtnMenuPlay").GetComponent<Button>().onClick.AddListener(Sair);
+        GameObject.Find("/CanvasMenu/BtnMenuRanking").GetComponent<Button>().onClick.AddListener(Ranking);
+        GameObject.Find("/CanvasMenu/BtnSair").GetComponent<Button>().onClick.AddListener(Sair);
     }
 
     private void Sair()

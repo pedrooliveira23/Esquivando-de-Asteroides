@@ -22,7 +22,7 @@ public class ScriptGamePlayGUI : MonoBehaviour
 
     private void Sair()
     {
-        Pausar();
+        Replay();
         SceneManager.LoadScene("SceneGameMenu");
     }
 
