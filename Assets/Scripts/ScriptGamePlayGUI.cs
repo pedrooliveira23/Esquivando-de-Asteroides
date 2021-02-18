@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScriptGamePlayGUI : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class ScriptGamePlayGUI : MonoBehaviour
 
     private void Sair()
     {
-        ScriptGameOver.SairDoJogo();
+        SceneManager.LoadScene("SceneGameMenu");
     }
 
     private void Replay()
