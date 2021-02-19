@@ -16,12 +16,13 @@ public class ScriptGameMenu : MonoBehaviour
 
     private void Sair()
     {
-        Debug.Log("Sair");
+        GameObject.Find("/CanvasMenu/AudioClick").GetComponent<AudioSource>().Play();
         Application.Quit();
     }
 
     private void Play()
     {
-        SceneManager.LoadScene("SceneGamePlay");
+        GameObject.Find("/CanvasMenu/AudioClick").GetComponent<AudioSource>().Play();
+        ScriptGameOver.ReiniciarJogo();
     }
 }

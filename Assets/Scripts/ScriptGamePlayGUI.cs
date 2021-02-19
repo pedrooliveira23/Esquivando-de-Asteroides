@@ -22,12 +22,13 @@ public class ScriptGamePlayGUI : MonoBehaviour
 
     private void SairMenu()
     {
-        Replay();
+        GameObject.Find("/Canvas/AudioClick").GetComponent<AudioSource>().Play();
         SceneManager.LoadScene("SceneGameMenu");
     }
 
     private void Replay()
     {
+        GameObject.Find("/Canvas/AudioClick").GetComponent<AudioSource>().Play();
         Pausar();
         ScriptGameOver.ReiniciarJogo();
     }
@@ -39,7 +40,8 @@ public class ScriptGamePlayGUI : MonoBehaviour
 
     public void Pausar()
     {
-        if(Time.timeScale == 1)
+        GameObject.Find("/Canvas/AudioClick").GetComponent<AudioSource>().Play();
+        if (Time.timeScale == 1)
         {
             Time.timeScale = 0;
             canvasPausado.SetActive(true);

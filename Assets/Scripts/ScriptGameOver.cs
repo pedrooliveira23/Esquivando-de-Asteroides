@@ -13,17 +13,19 @@ public class ScriptGameOver : MonoBehaviour
     }
     void Update()
     {
-        GameObject.Find("/CanvasGameOver/TextPontuacaoFinal").GetComponent<Text>().text = "Você foi atingido! Pontuação final: " + ScriptGameMaster.pontuacao;
+        GameObject.Find("/CanvasGameOver/TextPontuacaoFinal").GetComponent<Text>().text = "Pontuação: " + ScriptGameMaster.pontuacao;
     }
 
     public static void SairParaMenu()
     {
+        GameObject.Find("/CanvasGameOver/AudioClick").GetComponent<AudioSource>().Play();
         ReiniciarJogo();
         SceneManager.LoadScene("SceneGameMenu");
     }
 
     public static void ReiniciarJogo()
     {
+        GameObject.Find("/CanvasGameOver/AudioClick").GetComponent<AudioSource>().Play();
         ScriptGameMaster.pontuacao = 0;
         ScriptNave.velocidade = 0;
         ScriptGameMaster.vivo = true;

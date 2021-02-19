@@ -18,6 +18,7 @@ public class ScriptNave : MonoBehaviour
     {
         if (col.gameObject.tag == "asteroide")
         {
+            GameObject.Find("/AudioCollision").GetComponent<AudioSource>().Play();
             ScriptGameMaster.vivo = false;
         }
     }
