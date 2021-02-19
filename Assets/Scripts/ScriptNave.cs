@@ -26,8 +26,8 @@ public class ScriptNave : MonoBehaviour
     {
         Vector3 pos = new Vector3();
 
-        pos = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20)), 0.1f);
-        //pos = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 20)), 0.1f);
+        //pos = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20)), 0.1f);
+        pos = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 20)), 0.1f);
 
         transform.position = pos;
     }
