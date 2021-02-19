@@ -1,32 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ScriptGameOver : MonoBehaviour
 {
-    private void OnGUI()
+    void Start()
     {
-        GUI.Label(new Rect(10, 10, 200, 40), "Você perdeu! Pontuação: " + ScriptGameMaster.pontuacao);
-        if (GUI.Button(new Rect(10, 70, 120, 40), "Jogar Novamente"))
-        {
-            ReiniciarJogo();
-        }
-        if (GUI.Button(new Rect(10, 120, 120, 40), "Sair do Jogo"))
-        {
-            SairDoJogo();
-        }
+        GameObject.Find("/CanvasGameOver/BtnReplay").GetComponent<Button>().onClick.AddListener(ReiniciarJogo);
+        GameObject.Find("/CanvasGameOver/BtnSair").GetComponent<Button>().onClick.AddListener(SairParaMenu);
+    }
+    void Update()
+    {
+        GameObject.Find("/CanvasGameOver/TextPontuacaoFinal").GetComponent<Text>().text = "Você foi atingido! Pontuação final: " + ScriptGameMaster.pontuacao;
     }
 
-    public static void SairDoJogo()
+    public static void SairParaMenu()
     {
-        Application.Quit();
+        ReiniciarJogo();
+        SceneManager.LoadScene("SceneGameMenu");
     }
 
     public static void ReiniciarJogo()
     {
         ScriptGameMaster.pontuacao = 0;
-        ScriptNave.velocidade = 30f;
+        ScriptNave.velocidade = 0;
         ScriptGameMaster.vivo = true;
         ScriptGameMaster.tempo = 0;
         SceneManager.LoadScene("SceneGamePlay");

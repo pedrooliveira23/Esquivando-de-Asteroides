@@ -18,6 +18,7 @@ public class ScriptGameMaster : MonoBehaviour
         StartCoroutine("contaPontuacao");
         StartCoroutine("ondaDeAsteroides");
         StartCoroutine("ondaDeAsteroidesNoPlayer");
+        StartCoroutine("contaTempo");
 
         for(int i = 0; i <= 300; i++)
         {
@@ -92,9 +93,15 @@ public class ScriptGameMaster : MonoBehaviour
     {
         while (true && vivo)
         {
-            yield return new WaitForSeconds(1f);
+            if (float.IsInfinity(tick))
+            {
+                yield return new WaitForSeconds(1f);
+            }
+            else
+            {
+                yield return new WaitForSeconds(tick);
+            }
             pontuacao++;
-            tempo++;
         }
     }
 
@@ -104,6 +111,14 @@ public class ScriptGameMaster : MonoBehaviour
         {
             yield return new WaitForSeconds(3f);
             SceneManager.LoadScene("SceneGameOver");
+        }
+    }
+
+    IEnumerator contaTempo()
+    {
+        while (true) { 
+            yield return new WaitForSeconds(1f);
+            tempo++;
         }
     }
 }
