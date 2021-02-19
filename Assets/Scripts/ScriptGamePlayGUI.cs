@@ -15,12 +15,12 @@ public class ScriptGamePlayGUI : MonoBehaviour
         GetComponentInChildren<Button>().onClick.AddListener(Pausar);
         GameObject.Find("/Canvas/CanvasPausado/BtnPlay").GetComponent<Button>().onClick.AddListener(Pausar);
         GameObject.Find("/Canvas/CanvasPausado/BtnReplay").GetComponent<Button>().onClick.AddListener(Replay);
-        GameObject.Find("/Canvas/CanvasPausado/BtnSair").GetComponent<Button>().onClick.AddListener(Sair);
+        GameObject.Find("/Canvas/CanvasPausado/BtnSair").GetComponent<Button>().onClick.AddListener(SairMenu);
         canvasPausado = GameObject.Find("/Canvas/CanvasPausado");
         canvasPausado.SetActive(false);
     }
 
-    private void Sair()
+    private void SairMenu()
     {
         Replay();
         SceneManager.LoadScene("SceneGameMenu");
