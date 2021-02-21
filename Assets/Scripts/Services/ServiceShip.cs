@@ -20,10 +20,10 @@ public class ServiceShip : MonoBehaviour
     public void playerInput()
     {
         //controle via mouse
-        transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20)), 0.1f);
+        //transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 20)), 0.1f);
 
         //Controle via touch
-        //transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 20)), 0.1f);
+        transform.position = Vector3.Lerp(transform.position, Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, Input.GetTouch(0).position.y, 20)), 0.1f);
     }
 
     public void pauseInput()
@@ -34,6 +34,11 @@ public class ServiceShip : MonoBehaviour
         {
             ship.setCanMove(true);
         }
+    }
+
+    public bool isInputPaused()
+    {
+        return ship.getCanMove();
     }
 
     public bool isAlive()

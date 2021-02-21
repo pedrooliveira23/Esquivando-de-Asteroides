@@ -20,9 +20,9 @@ public class ServiceGameMaster : MonoBehaviour
         serviceSceneTransition = GetComponent<ServiceSceneTransition>();
         serviceAsteroid = prefabAsteroid.GetComponent<ServiceAsteroid>();
         initiateNewGame();
-        StartCoroutine(normalAsteroidWave(gameMaster.getWaveTime(), gameMaster.getWaveTime()));
-        StartCoroutine(specialAsteroidWave(1f,15f));
         initialAsteroidWave();
+        StartCoroutine("normalAsteroidWave");
+        StartCoroutine("specialAsteroidWave");
         StartCoroutine("updateScore");
         StartCoroutine("updateGameTime");
     }
@@ -31,7 +31,7 @@ public class ServiceGameMaster : MonoBehaviour
     {
         verifyIfAlive();
         serviceAsteroid.updateVelocity(gameMaster.getGameSpeed());
-        gameMaster.setWavetime(1f / (gameMaster.getGameTime() / 4f));
+        gameMaster.setWavetime(1.0f / (gameMaster.getGameTime() / 8.0f));
     }
 
     public void initiateNewGame()
@@ -80,7 +80,7 @@ public class ServiceGameMaster : MonoBehaviour
 
     IEnumerator updateScore()
     {
-        while (true && serviceShip.isAlive())
+        while (true && serviceShip.isAlive() && serviceShip.isInputPaused())
         {
             if (float.IsInfinity(gameMaster.getWaveTime()))
             {
@@ -105,39 +105,28 @@ public class ServiceGameMaster : MonoBehaviour
         }
     }
 
-    IEnumerator normalAsteroidWave(float minimalTime, float maximumTime)
+    IEnumerator normalAsteroidWave()
     {
-        while (true)
-        {
-            if(float.IsInfinity(minimalTime) || float.IsInfinity(maximumTime))
+        while (true) { 
+            if(float.IsInfinity(gameMaster.getWaveTime()))
             {
                 yield return new WaitForSeconds(1f);
             } else
             {
-                yield return new WaitForSeconds(Random.Range(minimalTime,maximumTime));
+                yield return new WaitForSeconds(gameMaster.getWaveTime());
             }
-
-            createAsteroid(new Vector3(Random.Range(1.0f, 20.0f), Random.Range(1.0f, 20.0f), Random.Range(1.0f, 20.0f)), new Vector3(-3000, Random.Range(-500, 500), Random.Range(-500, 500)));
-            createAsteroid(new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f)), new Vector3(-3000, Random.Range(-250, 250), Random.Range(-250, 250)));
-            createAsteroid(new Vector3(Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f)), new Vector3(-3000, Random.Range(-50, 50), Random.Range(-50, 50)));
+            createAsteroid(new Vector3(Random.Range(1.0f, 20.0f), Random.Range(1.0f, 20.0f), Random.Range(1.0f, 20.0f)), new Vector3(-3000, Random.Range(-250, 250), Random.Range(-250, 250)));
+            createAsteroid(new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f)), new Vector3(-3000, Random.Range(-125, 125), Random.Range(-125, 125)));
+            createAsteroid(new Vector3(Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f)), new Vector3(-3000, Random.Range(-25, 25), Random.Range(-25, 25)));
         }
     }
 
-    IEnumerator specialAsteroidWave(float minimalTime, float maximumTime)
+    IEnumerator specialAsteroidWave()
     {
-        while (true)
-        {
-            if (float.IsInfinity(minimalTime) || float.IsInfinity(maximumTime))
-            {
-                yield return new WaitForSeconds(1f);
-            }
-            else
-            {
-                yield return new WaitForSeconds(Random.Range(minimalTime, maximumTime));
-            }
-
-            createAsteroid(new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f)), new Vector3(-3000, GameObject.Find("Ship").transform.position.y, GameObject.Find("Ship").transform.position.z));        }
-
+        while (true) { 
+            yield return new WaitForSeconds(Random.Range(1.0f, 15.0f));
+            createAsteroid(new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f)), new Vector3(-3000, GameObject.Find("Ship").transform.position.y, GameObject.Find("Ship").transform.position.z));
+        }
     }
 
     public void initialAsteroidWave()
