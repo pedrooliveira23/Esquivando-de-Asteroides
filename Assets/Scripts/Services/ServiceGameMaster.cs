@@ -31,7 +31,7 @@ public class ServiceGameMaster : MonoBehaviour
     {
         verifyIfAlive();
         serviceAsteroid.updateVelocity(gameMaster.getGameSpeed());
-        gameMaster.setWavetime(1.0f / (gameMaster.getGameTime() / 8.0f));
+        gameMaster.setWavetime(1.0f / (gameMaster.getGameTime()/2));
     }
 
     public void initiateNewGame()
