@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class ServiceAsteroid : MonoBehaviour
 {
-    public static Asteroid asteroid;
 
     void Start()
     {
-        asteroid = new Asteroid();
         initiateRandomRotation();
     }
 
@@ -25,7 +23,7 @@ public class ServiceAsteroid : MonoBehaviour
 
     public void initiateAcceleration()
     {
-        GetComponent<Rigidbody>().velocity = new Vector3(asteroid.getVelocity(), 0, 0);
+        GetComponent<Rigidbody>().velocity = new Vector3(Asteroid.velocity, 0, 0);
     }
 
     public void autoDestroyValidation()
@@ -34,6 +32,11 @@ public class ServiceAsteroid : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void updateVelocity(int velocity)
+    {
+        Asteroid.velocity = velocity;
     }
 
 }

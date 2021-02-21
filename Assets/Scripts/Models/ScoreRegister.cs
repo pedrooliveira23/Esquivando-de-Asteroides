@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Asteroid : MonoBehaviour
+public class ScoreRegister : MonoBehaviour
 {
-    public static int velocity;
+    public static int score;
 }

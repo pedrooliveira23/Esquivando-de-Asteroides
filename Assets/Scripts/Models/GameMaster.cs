@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMaster
+public class GameMaster : MonoBehaviour
 {
-    private int score;
+    private int gameSpeed;
     private float gameTime;
     private float waveTime;
     private bool isPaused;
@@ -13,12 +13,12 @@ public class GameMaster
     {
         isPaused = false;
     }
-    public int getScore() { return score; }
     public float getGameTime() { return gameTime; }
     public float getWaveTime() { return waveTime; }
     public bool getIsPaused() { return isPaused; }
-    public void setScore(int score) { this.score = score; }
+    public int getGameSpeed() { return gameSpeed; }
     public void setGameTime(float gameTime) { this.gameTime = gameTime; }
     public void setWavetime(float waveTime) { this.waveTime = waveTime; }
     public void setIsPaused(bool isPaused) { this.isPaused = isPaused; }
+    public void setGameSpeed(int gameSpeed) { this.gameSpeed = gameSpeed; }
 }

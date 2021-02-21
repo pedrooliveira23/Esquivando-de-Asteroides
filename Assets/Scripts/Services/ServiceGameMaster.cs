@@ -5,59 +5,70 @@ using UnityEngine.UI;
 
 public class ServiceGameMaster : MonoBehaviour
 {
-    public static GameMaster gameMaster;
-    private Ship ship;
+    private GameMaster gameMaster;
+    private ServiceShip serviceShip;
+    private ServiceSceneTransition serviceSceneTransition;
+    private ServiceScoreRegister serviceScoreRegister;
+    private ServiceAsteroid serviceAsteroid;
     public GameObject prefabAsteroid;
 
     void Start()
     {
-        gameMaster = new GameMaster();
-        ship = ServiceShip.ship;
+        gameMaster = GetComponent<GameMaster>();
+        serviceScoreRegister = GetComponent<ServiceScoreRegister>();
+        serviceShip = GameObject.Find("Ship").GetComponent<ServiceShip>();
+        serviceSceneTransition = GetComponent<ServiceSceneTransition>();
+        serviceAsteroid = prefabAsteroid.GetComponent<ServiceAsteroid>();
+        initiateNewGame();
+        StartCoroutine(normalAsteroidWave(gameMaster.getWaveTime(), gameMaster.getWaveTime()));
+        StartCoroutine(specialAsteroidWave(1f,15f));
+        initialAsteroidWave();
         StartCoroutine("updateScore");
         StartCoroutine("updateGameTime");
-
-        if(prefabAsteroid != null) {
-            StartCoroutine(normalAsteroidWave(gameMaster.getWaveTime(), gameMaster.getWaveTime()));
-            StartCoroutine(specialAsteroidWave(1f,15f));
-            initialAsteroidWave();
-        }
-
-        if(GameObject.Find("Canvas/BtnPause") != null) {
-            GameObject.Find("Canvas/BtnPause").GetComponent<Button>().onClick.AddListener(pauseGame);
-        }
     }
 
     void Update()
     {
-        if (GameObject.Find("Canvas/TextScore") != null)
-        {
-            GameObject.Find("Canvas/TextScore").GetComponent<Text>().text = "Pontuação: " + gameMaster.getScore();
-        }
+        verifyIfAlive();
+        serviceAsteroid.updateVelocity(gameMaster.getGameSpeed());
         gameMaster.setWavetime(1f / (gameMaster.getGameTime() / 4f));
     }
 
     public void initiateNewGame()
     {
-        ship.setIsAlive(true);
-        gameMaster.setScore(0);
+        serviceShip.initiateNewGame();
+        serviceScoreRegister.updateScore(0);
+        gameMaster.setGameSpeed(20);
         gameMaster.setGameTime(0);
         gameMaster.setWavetime(0);
         gameMaster.setIsPaused(false);
+        Time.timeScale = 1;
     }
-
     public void pauseGame()
     {
         if (gameMaster.getIsPaused())
         {
             Time.timeScale = 1;
             gameMaster.setIsPaused(false);
-            ServiceSceneTransition.isPaused = false;
+            serviceShip.pauseInput();
         }
         else
         {
             Time.timeScale = 0;
             gameMaster.setIsPaused(true);
-            ServiceSceneTransition.isPaused = true;
+            serviceShip.pauseInput();
+        }
+    }
+
+    public bool isPaused()
+    {
+        return gameMaster.getIsPaused();
+    }
+    public void verifyIfAlive()
+    {
+        if (!serviceShip.isAlive())
+        {
+            serviceSceneTransition.goToGameOverScene();
         }
     }
 
@@ -69,7 +80,7 @@ public class ServiceGameMaster : MonoBehaviour
 
     IEnumerator updateScore()
     {
-        while (true && ship.getIsAlive())
+        while (true && serviceShip.isAlive())
         {
             if (float.IsInfinity(gameMaster.getWaveTime()))
             {
@@ -79,8 +90,9 @@ public class ServiceGameMaster : MonoBehaviour
             {
                 yield return new WaitForSeconds(gameMaster.getWaveTime());
             }
-            gameMaster.setScore(gameMaster.getScore()+1);
-            ServiceAsteroid.asteroid.setVelocity(ServiceAsteroid.asteroid.getVelocity() + 1);
+
+            serviceScoreRegister.updateScore(serviceScoreRegister.printScore() + 1);
+            gameMaster.setGameSpeed(gameMaster.getGameSpeed() + 1);
         }
     }
 

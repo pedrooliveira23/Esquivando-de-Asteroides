@@ -615,6 +615,7 @@ GameObject:
   - component: {fileID: 518358914}
   - component: {fileID: 518358918}
   - component: {fileID: 518358917}
+  - component: {fileID: 518358919}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -708,10 +709,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 518358913}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df59e002bdf06624798fb4078229cd83, type: 3}
+  m_Script: {fileID: 11500000, guid: b42f5d8cb38e11641a20b817e4612383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabAsteroid: {fileID: 0}
+--- !u!114 &518358919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518358913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc67f8fbb651bc8469822186058f02c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &982528772
 GameObject:
   m_ObjectHideFlags: 0

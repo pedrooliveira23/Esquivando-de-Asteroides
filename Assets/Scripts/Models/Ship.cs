@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship
+public class Ship : MonoBehaviour
 {
     private bool isAlive;
     private bool canMove;
