@@ -115,8 +115,6 @@ public class ServiceGameMaster : MonoBehaviour
             {
                 yield return new WaitForSeconds(gameMaster.getWaveTime());
             }
-            createAsteroid(new Vector3(Random.Range(1.0f, 15.0f), Random.Range(1.0f, 15.0f), Random.Range(1.0f, 15.0f)), new Vector3(-3000, Random.Range(-500, 500), Random.Range(-500, 500)));
-            createAsteroid(new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f)), new Vector3(-3000, Random.Range(-250, 250), Random.Range(-250, 250)));
             createAsteroid(new Vector3(Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f)), new Vector3(-3000, Random.Range(-50, 50), Random.Range(-50, 50)));
         }
     }
@@ -131,11 +129,13 @@ public class ServiceGameMaster : MonoBehaviour
 
     public void initialAsteroidWave()
     {
-        for(int i = 0; i <=300; i++)
+        for(int i = 0; i <=90; i++)
         {
-            createAsteroid(new Vector3(Random.Range(1.0f, 15.0f), Random.Range(1.0f, 15.0f), Random.Range(1.0f, 15.0f)), new Vector3(Random.Range(-100, -3000), Random.Range(-500, 500), Random.Range(-500, 500)));
-            createAsteroid(new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f)), new Vector3(Random.Range(-100, -3000), Random.Range(-250, 250), Random.Range(-250, 250)));
             createAsteroid(new Vector3(Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f), Random.Range(1.0f, 5.0f)), new Vector3(Random.Range(-100, -3000), Random.Range(GameObject.Find("Ship").transform.position.y - 25, GameObject.Find("Ship").transform.position.y + 25), Random.Range(GameObject.Find("Ship").transform.position.z - 25, GameObject.Find("Ship").transform.position.z + 25)));
+        }
+
+        for(int i = 0; i <= 10; i++) {
+            createAsteroid(new Vector3(Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f), Random.Range(1.0f, 10.0f)), new Vector3(Random.Range(-100, -3000), GameObject.Find("Ship").transform.position.y, GameObject.Find("Ship").transform.position.z));
         }
     }
 }
